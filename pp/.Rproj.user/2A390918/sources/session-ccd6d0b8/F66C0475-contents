@@ -1,0 +1,170 @@
+# مكتبات
+library(shiny)
+library(randomForest)
+library(dplyr)
+library(readr)
+library(readxl)
+library(caret)
+
+
+ui <- fluidPage(
+  titlePanel("نظام تنبؤ المبيعات + توصيات ذكية (Pro-Level)"),
+  
+  sidebarLayout(
+    sidebarPanel(
+      fileInput("trainFile", "ارفع ملف التدريب (CSV/Excel)"),
+      uiOutput("col_select_ui"),
+      actionButton("trainBtn", "تدريب النموذج"),
+      
+      fileInput("newFile", "ارفع ملف البيانات الجديدة للتنبؤ"),
+      
+      uiOutput("whatif_ui"),
+      actionButton("simulateBtn", "حساب What-if"),
+      downloadButton("downloadData", "تنزيل النتائج CSV")
+    ),
+    
+    mainPanel(
+      tabsetPanel(
+        tabPanel("التنبؤ", tableOutput("predTable")),
+        tabPanel("تقييم النموذج", textOutput("modelEval")),
+        tabPanel("التوصية", textOutput("recommendation")),
+        tabPanel("What-if النتائج", tableOutput("whatifTable"))
+      )
+    )
+  )
+)
+
+
+server <- function(input, output, session){
+  
+
+  data <- reactive({
+    req(input$trainFile)
+    ext <- tools::file_ext(input$trainFile$name)
+    df <- if(ext=="csv") read_csv(input$trainFile$datapath) else read_excel(input$trainFile$datapath)
+    
+
+    df <- df %>% mutate_if(is.character, ~na_if(trimws(.), ""))
+    num_cols <- sapply(df, is.numeric)
+    df[, num_cols] <- lapply(df[, num_cols], function(x) ifelse(is.na(x), median(x, na.rm=TRUE), x))
+    return(df)
+  })
+  
+
+  output$col_select_ui <- renderUI({
+    req(data())
+    tagList(
+      selectInput("target_col", "اختر العمود الهدف (Sales)", choices = names(data())),
+      selectInput("feature_cols", "اختر الأعمدة كميزات", choices = names(data()), multiple = TRUE)
+    )
+  })
+  
+
+  model_info <- eventReactive(input$trainBtn, {
+    req(input$target_col, input$feature_cols)
+    df <- data()
+    
+
+    features <- df[, input$feature_cols]
+    features <- features %>% mutate_if(is.character, as.factor)
+    
+    target <- df[[input$target_col]]
+    if(is.character(target)) {
+      target <- as.factor(target)
+    }
+    
+    set.seed(123)
+    trainIndex <- createDataPartition(target, p = 0.8, list = FALSE)
+    X_train <- features[trainIndex, ]
+    X_test  <- features[-trainIndex, ]
+    Y_train <- target[trainIndex]
+    Y_test  <- target[-trainIndex]
+    
+
+    rf_model <- randomForest(x = X_train, y = Y_train, ntree = 100)
+    
+
+    pred_test <- predict(rf_model, newdata = X_test)
+    rmse <- sqrt(mean((pred_test - Y_test)^2))
+    
+    list(model=rf_model, rmse=rmse, X_train=X_train, X_test=X_test, Y_train=Y_train, Y_test=Y_test)
+  })
+  
+
+  output$modelEval <- renderText({
+    req(model_info())
+    paste0("تم تدريب النموذج بنجاح. RMSE على بيانات الاختبار: ", round(model_info()$rmse,2))
+  })
+  
+
+  new_pred <- reactive({
+    req(input$newFile, model_info())
+    ext <- tools::file_ext(input$newFile$name)
+    new_df <- if(ext=="csv") read_csv(input$newFile$datapath) else read_excel(input$newFile$datapath)
+    
+
+    new_df <- new_df %>% mutate_if(is.character, as.factor)
+    
+    preds <- predict(model_info()$model, newdata=new_df[, input$feature_cols])
+    new_df$Predicted_Sales <- round(preds,0)
+    new_df
+  })
+  
+  output$predTable <- renderTable({ new_pred() })
+  
+  # Feature Importance
+  feature_imp <- reactive({
+    req(model_info())
+    imp <- importance(model_info()$model)
+    imp_df <- data.frame(Feature=rownames(imp), Importance=imp[,1])
+    imp_df <- imp_df %>% arrange(desc(Importance))
+    imp_df
+  })
+  
+
+  output$recommendation <- renderText({
+    req(new_pred(), feature_imp())
+    avg_pred <- mean(new_pred()$Predicted_Sales)
+    top_feat <- feature_imp()$Feature[1]
+    
+    if(avg_pred < 100){
+      paste0("⚠ المبيعات منخفضة. أهم عامل: ", top_feat,
+             ". ننصح بمراجعة هذا العامل لرفع المبيعات.")
+    } else if(avg_pred < 200){
+      paste0("ℹ المبيعات مستقرة. أهم عامل: ", top_feat,
+             ". يمكن تحسين النتائج عبر تعديل هذا العامل.")
+    } else {
+      paste0("✅ المبيعات مرتفعة. أهم عامل: ", top_feat,
+             ". حافظ على الأداء الحالي أو عززه حسب هذا العامل.")
+    }
+  })
+  
+
+  output$whatif_ui <- renderUI({
+    req(feature_imp())
+    top_feat <- feature_imp()$Feature[1]
+    numericInput("whatif_val", paste("What-if: غيّر قيمة", top_feat), value=mean(data()[[top_feat]]))
+  })
+  
+
+  whatif_pred <- eventReactive(input$simulateBtn, {
+    req(input$whatif_val, new_pred(), feature_imp())
+    df <- new_pred()
+    top_feat <- feature_imp()$Feature[1]
+    df[[top_feat]] <- input$whatif_val
+    df$Predicted_Sales <- round(predict(model_info()$model, newdata=df[, input$feature_cols]),0)
+    df
+  })
+  
+  output$whatifTable <- renderTable({ whatif_pred() })
+  
+
+  output$downloadData <- downloadHandler(
+    filename = function(){ paste0("predictions-", Sys.Date(), ".csv") },
+    content = function(file){ write.csv(new_pred(), file, row.names=FALSE) }
+  )
+  
+}
+
+
+shinyApp(ui, server)
