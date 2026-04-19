@@ -1,4 +1,0 @@
-library(ggmap)
-saudi_map <- get_stamenmap(bbox = c(left=39, bottom=16, right=55, top=32), zoom = 6)
-ggmap(saudi_map) +
-  geom_point(data = population_data, aes(x = lon, y = lat, size = population))

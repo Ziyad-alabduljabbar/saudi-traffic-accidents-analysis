@@ -1,0 +1,11 @@
+.RData
+.Rhistory
+.Rproj.user/
+pp/
+weather/
+Module*.pptx
+*.docx
+*.pdf
+*.png
+*.jpg
+Rplot* 
