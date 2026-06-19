@@ -1,27 +1,28 @@
-# 🚗 Saudi Traffic Accidents | تحليل حوادث المرور
-### Statistical Analysis & Data Visualization of Traffic Casualties (2016–2019)
+# 🚗 Saudi Traffic Accidents
+### Statistical Analysis and Data Visualization of Road Safety (2016–2019)
 
-[![GitHub](https://img.shields.io/badge/GitHub-Repository-black?logo=github)](https://github.com/Ziyad-alabduljabbar/Saudi-Traffic-Accidents-Analysis)
-[![R](https://img.shields.io/badge/R-Language-blue?logo=R)](https://www.r-project.org/)
-[![RStudio](https://img.shields.io/badge/RStudio-IDE-blue?logo=rstudio)](https://posit.co/)
+[![GitHub](https://img.shields.io/badge/GitHub-Saudi--Accidents-black?logo=github)](https://github.com/Ziyad-alabduljabbar/Saudi-Traffic-Accidents)
+[![R](https://img.shields.io/badge/R-4.4.1-blue?logo=R)](https://www.r-project.org/)
+[![Tidyverse](https://img.shields.io/badge/Library-Tidyverse-orange?logo=tidyverse)](https://www.tidyverse.org/)
+[![RStudio](https://img.shields.io/badge/IDE-RStudio-blue?logo=rstudio)](https://posit.co/)
 
 ---
 
 ## 🔍 About
 
-**Saudi Traffic Accidents Analysis** is a data science project that explores and visualizes traffic accidents across the Kingdom of Saudi Arabia. 
+**Saudi Traffic Accidents Analysis** is a data science project aimed at studying and analyzing traffic accident statistics in the Kingdom of Saudi Arabia between **2016 and 2019**. 
 
-Based on the dataset titled *"Saudi Arabia Traffic Accidents and Casualties (Injured and Dead)"*, this project visualizes regional comparisons, yearly trends, and the statistical correlation between injuries and fatalities to understand road safety improvements over time.
+The project utilizes **Data Science** techniques to analyze a comprehensive dataset of accidents, injuries, and fatalities. It provides data visualizations that help in understanding the geographical distribution of accidents and temporal trends, ultimately contributing to the enhancement of road safety awareness.
 
 ---
 
 ## ✨ Features
 
-- 📊 **Exploratory Data Analysis (EDA)** — Comprehensive analysis of accident data across 13 regions.
-- 📈 **Time-Series Tracking** — Comparing the total count of accidents, deaths, and injuries by year.
-- 🗺️ **Regional Comparison** — Identifying high-risk vs. low-risk zones based on historical data.
-- 🔗 **Correlation Analysis** — Investigating the statistical relationship between injuries and fatalities.
-- 📄 **Dynamic Reporting** — Automated, reproducible report generation using R Markdown.
+- 📊 **Regional Analysis** — Detailed breakdown of accident distributions across different regions of the Kingdom.
+- 📉 **Trend Modeling** — Tracking the evolution of fatalities and injuries over the years.
+- 🎯 **Regression Insights** — Utilizing statistical regression lines to demonstrate the decline in mortality rates.
+- 🗺️ **High-Impact Identification** — Identifying the most affected regions and areas with the highest traffic density.
+- 📄 **Automated Reports** — Generating dynamic reports in PDF, Word, and HTML formats via R Markdown.
 
 ---
 
@@ -29,23 +30,36 @@ Based on the dataset titled *"Saudi Arabia Traffic Accidents and Casualties (Inj
 
 | Layer | Technology |
 |-------|-----------|
-| Backend/Language | R |
-| IDE | RStudio |
+| Programming Language | R |
 | Data Manipulation | tidyverse, dplyr |
-| Data Visualization| ggplot2 |
-| Reporting | R Markdown (knitr, TinyTeX) |
+| Visualization Engine | ggplot2 |
+| Report Generation | R Markdown (knitr) |
+| Environment | RStudio |
+| PDF Engine | TinyTeX |
 
 ---
 
-## 📊 Key Findings
+## 📊 Insights & Findings
 
-| Metric / Insight | Result |
+| Metric | Result |
 |--------|--------|
-| Peak Accident Year | 2016 🔴 |
-| Lowest Accident Year | 2019 🟢 |
-| Highest Accidents | Makkah Region |
-| Lowest Accidents | Al-Baha Region |
-| Fatality Trend | Decreasing consistently across all regions 📉 |
+| Peak Accident Year | 2016 (Highest Recorded) |
+| Lowest Accident Year | 2019 (Significant Decline) |
+| Top Impacted Region | Makkah |
+| Safest Region | Al-Baha |
+| Fatality Trend | Continuous Decrease Across All Regions |
+
+---
+
+## 💡 Conclusion & Impact
+
+The data clearly indicates a **continuous and significant decline** in the number of accidents and fatalities from 2016 to 2019 across all regions of the Kingdom. 
+
+This positive trend is a direct result of the **evolution in traffic management and regulations** in Saudi Arabia, which includes:
+1. **Automated Monitoring:** The expansion of automated traffic violation detection systems (e.g., Saher).
+2. **Strict Law Enforcement:** Rigorous enforcement of traffic laws, such as mandatory seatbelt use and strict penalties for mobile phone usage while driving.
+3. **Public Awareness:** Raising road safety awareness through continuous national campaigns.
+4. **Infrastructure:** Improving road infrastructure and engineering to eliminate accident black spots.
 
 ---
 
@@ -53,11 +67,25 @@ Based on the dataset titled *"Saudi Arabia Traffic Accidents and Casualties (Inj
 
 ```bash
 # Clone the repository
-git clone [https://github.com/Ziyad-alabduljabbar/Saudi-Traffic-Accidents-Analysis.git](https://github.com/Ziyad-alabduljabbar/Saudi-Traffic-Accidents-Analysis.git)
-cd Saudi-Traffic-Accidents-Analysis
+git clone [https://github.com/Ziyad-alabduljabbar/Saudi-Traffic-Accidents.git](https://github.com/Ziyad-alabduljabbar/Saudi-Traffic-Accidents.git)
+cd Saudi-Traffic-Accidents
 
-# Open the project in RStudio and install required packages in the Console:
+# Install required packages in RStudio Console:
 # install.packages(c("tidyverse", "rmarkdown", "tinytex"))
-# tinytex::install_tinytex()
 
-# Open the .Rmd file and click "Knit" to generate the PDF/Word/HTML report
+# Run the Analysis
+# Open "accidents-in-the-Kingdom-of-Saudi-Arabia.Rmd"
+# Click the 'Knit' button in RStudio
+```
+
+---
+
+## 👥 Team
+
+| Name |
+|------|
+| Ziad Othman Al-Abduljabbar |
+| Mohammed Ahmed Alghanam |
+
+**Institution:** Majmaah University — College of Computer and Information Sciences  
+**Year:** 2026
