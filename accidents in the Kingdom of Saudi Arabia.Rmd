@@ -2,19 +2,22 @@
 title: "Traffic Accidents Analysis in Saudi Arabia (2016–2019)"
 author: "Ziad Al-Abduljabbar, Mohammed Alghanam"
 date: "2025-04-21"
-output: pdf_document
+output:
+  html_document:
+    df_print: paged
+  pdf_document: default
+  word_document: default
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
-```{r}
+```{r fig.width=14, fig.height=8}
 # load required library 
 library(tidyverse)
 
 #read dataset
 data <- read_csv2("saudi-arabia-traffic-accidents-and-casualties-injured-dead-2008.csv")
-View (data)
 
 #select  required colmun
 df<- select(data,"Year","Region" ,"Indicator" ,"Value")
@@ -61,25 +64,43 @@ deaths_data <- data %>%
 ggplot(data=deaths_data, aes(x=Year, y=Total_Deaths, colour=Region)) +
   geom_point(aes(colour = Region)) + stat_smooth(method=lm, se=FALSE)
 
+
+#Case 4:
+df_filtered <- df %>%
+  mutate(
+    Category = ifelse(Indicator == "No. of Casualties - Injured", "Injured",
+                      ifelse(Indicator == "No. of Casualties - Dead", "Dead", NA)),
+    Value = as.numeric(Value)
+  ) %>%
+  filter(!is.na(Category))# Keep only rows with Injured or Dead
+
+# Summarize total Injured and Dead per Region
+df_summary <- df_filtered %>%
+  group_by(Region, Category) %>%
+  summarise(Total = sum(Value, na.rm = TRUE), .groups = "drop") %>%
+  tidyr::pivot_wider(names_from = Category, values_from = Total)
+
+df_summary<-df_summary %>%  filter(Region != "Total")
+
+
+
+# Plot Injured vs Dead per Region
+ggplot(df_summary, aes(x = Injured, y = Dead, color = Region, label = Region)) +
+  geom_point(size = 4) +
+  geom_text(nudge_y = 200, size = 3) +
+  labs(
+    title = "Traffic Injuries vs Deaths by Region ",
+    x = "Total Injured",
+    y = "Total Dead"
+  ) +
+  theme_minimal(base_size = 14) +
+  theme(plot.title = element_text(size = 10, face = "bold")) +
+  guides(color = "none")  # Hide legend because we label directly
+
  
 ```
 
-## R Markdown
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
 
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
 
-```{r cars}
-summary(cars)
-```
 
-## Including Plots
-
-You can also embed plots, for example:
-
-```{r pressure, echo=FALSE}
-plot(pressure)
-```
-
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
