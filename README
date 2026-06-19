@@ -1,25 +1,31 @@
-# 🚗 Saudi Traffic Accidents Analysis | تحليل حوادث المرور في السعودية
-### Statistical Analysis and Data Visualization of Traffic Casualties (2016–2019)
+<div align="center">
 
-[![GitHub](https://img.shields.io/badge/GitHub-Traffic--Analysis-black?logo=github)](https://github.com/Ziyad-alabduljabbar/Saudi-Traffic-Accidents-Analysis)
-[![R](https://img.shields.io/badge/R-Language-blue?logo=R)](https://www.r-project.org/)
-[![RStudio](https://img.shields.io/badge/RStudio-IDE-blue?logo=rstudio)](https://posit.co/products/open-source/rstudio/)
+# 🚗 Saudi Traffic Accidents | تحليل حوادث المرور
+### Statistical Analysis & Data Visualization of Traffic Casualties (2016–2019)
+
+[![GitHub](https://img.shields.io/badge/GitHub-Repository-181717?style=for-the-badge&logo=github)](https://github.com/Ziyad-alabduljabbar/Saudi-Traffic-Accidents-Analysis)
+[![R](https://img.shields.io/badge/R_Language-276DC3?style=for-the-badge&logo=r&logoColor=white)](https://www.r-project.org/)
+[![RStudio](https://img.shields.io/badge/RStudio_IDE-75AADB?style=for-the-badge&logo=rstudio&logoColor=white)](https://posit.co/)
+
+</div>
 
 ---
 
 ## 🔍 About
 
-**Saudi Traffic Accidents Analysis** is a data science project that explores the study of traffic accidents that occurred in the Kingdom of Saudi Arabia from 2016 to 2019. The analysis is based on the dataset titled "Saudi Arabia Traffic Accidents and Casualties (Injured and Dead)". It visualizes regional comparisons, yearly trends, and the correlation between injuries and deaths to understand road safety improvements over time.
+> **Saudi Traffic Accidents Analysis** is a data science project that explores and visualizes traffic accidents across the Kingdom of Saudi Arabia. 
+
+Based on the dataset titled *"Saudi Arabia Traffic Accidents and Casualties (Injured and Dead)"*, this project visualizes regional comparisons, yearly trends, and the statistical correlation between injuries and fatalities to understand road safety improvements over time.
 
 ---
 
 ## ✨ Features
 
-- 📊 **Exploratory Data Analysis (EDA)** — Comprehensive analysis of accident data across different regions.
+- 📊 **Exploratory Data Analysis (EDA)** — Comprehensive analysis of accident data across 13 regions.
 - 📈 **Time-Series Tracking** — Comparing the total count of accidents, deaths, and injuries by year.
 - 🗺️ **Regional Comparison** — Identifying high-risk vs. low-risk zones based on historical data.
-- 🔗 **Correlation Analysis** — Investigating the relationship between the number of injuries and fatalities.
-- 📄 **Dynamic Reporting** — Automated report generation using R Markdown.
+- 🔗 **Correlation Analysis** — Investigating the statistical relationship between injuries and fatalities.
+- 📄 **Dynamic Reporting** — Automated, reproducible report generation using R Markdown.
 
 ---
 
@@ -27,11 +33,11 @@
 
 | Layer | Technology |
 |-------|-----------|
-| Language | R |
-| IDE | RStudio |
-| Data Manipulation | `tidyverse`, `dplyr` |
-| Data Visualization | `ggplot2` |
-| Reporting | R Markdown (`knitr`, `TinyTeX`) |
+| **Language** | R |
+| **IDE** | RStudio |
+| **Data Manipulation** | `tidyverse`, `dplyr` |
+| **Data Visualization** | `ggplot2` |
+| **Reporting** | R Markdown (`knitr`, `TinyTeX`) |
 
 ---
 
@@ -39,8 +45,23 @@
 
 | Metric / Insight | Result |
 |--------|--------|
-| Peak Accident Year | 2016 |
-| Lowest Accident Year | 2019 |
-| Highest Accidents (Region) | Makkah |
-| Lowest Accidents (Region) | Al-Baha |
-| Fatality Trend | Decreasing
+| **Peak Accident Year** | 2016 🔴 |
+| **Lowest Accident Year** | 2019 🟢 |
+| **Highest Accidents** | Makkah Region |
+| **Lowest Accidents** | Al-Baha Region |
+| **Fatality Trend** | Decreasing consistently across all regions 📉 |
+
+---
+
+## ⚙️ Run Locally
+
+```bash
+# 1. Clone the repository
+git clone [https://github.com/Ziyad-alabduljabbar/Saudi-Traffic-Accidents-Analysis.git](https://github.com/Ziyad-alabduljabbar/Saudi-Traffic-Accidents-Analysis.git)
+cd Saudi-Traffic-Accidents-Analysis
+
+# 2. Open the project in RStudio and install required packages in the Console:
+install.packages(c("tidyverse", "rmarkdown", "tinytex"))
+tinytex::install_tinytex()
+
+# 3. Open the .Rmd file and click "Knit" to generate the PDF/Word/HTML report
