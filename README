@@ -1,19 +1,15 @@
-<div align="center">
-
 # 🚗 Saudi Traffic Accidents | تحليل حوادث المرور
 ### Statistical Analysis & Data Visualization of Traffic Casualties (2016–2019)
 
-[![GitHub](https://img.shields.io/badge/GitHub-Repository-181717?style=for-the-badge&logo=github)](https://github.com/Ziyad-alabduljabbar/Saudi-Traffic-Accidents-Analysis)
-[![R](https://img.shields.io/badge/R_Language-276DC3?style=for-the-badge&logo=r&logoColor=white)](https://www.r-project.org/)
-[![RStudio](https://img.shields.io/badge/RStudio_IDE-75AADB?style=for-the-badge&logo=rstudio&logoColor=white)](https://posit.co/)
-
-</div>
+[![GitHub](https://img.shields.io/badge/GitHub-Repository-black?logo=github)](https://github.com/Ziyad-alabduljabbar/Saudi-Traffic-Accidents-Analysis)
+[![R](https://img.shields.io/badge/R-Language-blue?logo=R)](https://www.r-project.org/)
+[![RStudio](https://img.shields.io/badge/RStudio-IDE-blue?logo=rstudio)](https://posit.co/)
 
 ---
 
 ## 🔍 About
 
-> **Saudi Traffic Accidents Analysis** is a data science project that explores and visualizes traffic accidents across the Kingdom of Saudi Arabia. 
+**Saudi Traffic Accidents Analysis** is a data science project that explores and visualizes traffic accidents across the Kingdom of Saudi Arabia. 
 
 Based on the dataset titled *"Saudi Arabia Traffic Accidents and Casualties (Injured and Dead)"*, this project visualizes regional comparisons, yearly trends, and the statistical correlation between injuries and fatalities to understand road safety improvements over time.
 
@@ -33,11 +29,11 @@ Based on the dataset titled *"Saudi Arabia Traffic Accidents and Casualties (Inj
 
 | Layer | Technology |
 |-------|-----------|
-| **Language** | R |
-| **IDE** | RStudio |
-| **Data Manipulation** | `tidyverse`, `dplyr` |
-| **Data Visualization** | `ggplot2` |
-| **Reporting** | R Markdown (`knitr`, `TinyTeX`) |
+| Backend/Language | R |
+| IDE | RStudio |
+| Data Manipulation | tidyverse, dplyr |
+| Data Visualization| ggplot2 |
+| Reporting | R Markdown (knitr, TinyTeX) |
 
 ---
 
@@ -45,23 +41,23 @@ Based on the dataset titled *"Saudi Arabia Traffic Accidents and Casualties (Inj
 
 | Metric / Insight | Result |
 |--------|--------|
-| **Peak Accident Year** | 2016 🔴 |
-| **Lowest Accident Year** | 2019 🟢 |
-| **Highest Accidents** | Makkah Region |
-| **Lowest Accidents** | Al-Baha Region |
-| **Fatality Trend** | Decreasing consistently across all regions 📉 |
+| Peak Accident Year | 2016 🔴 |
+| Lowest Accident Year | 2019 🟢 |
+| Highest Accidents | Makkah Region |
+| Lowest Accidents | Al-Baha Region |
+| Fatality Trend | Decreasing consistently across all regions 📉 |
 
 ---
 
 ## ⚙️ Run Locally
 
 ```bash
-# 1. Clone the repository
+# Clone the repository
 git clone [https://github.com/Ziyad-alabduljabbar/Saudi-Traffic-Accidents-Analysis.git](https://github.com/Ziyad-alabduljabbar/Saudi-Traffic-Accidents-Analysis.git)
 cd Saudi-Traffic-Accidents-Analysis
 
-# 2. Open the project in RStudio and install required packages in the Console:
-install.packages(c("tidyverse", "rmarkdown", "tinytex"))
-tinytex::install_tinytex()
+# Open the project in RStudio and install required packages in the Console:
+# install.packages(c("tidyverse", "rmarkdown", "tinytex"))
+# tinytex::install_tinytex()
 
-# 3. Open the .Rmd file and click "Knit" to generate the PDF/Word/HTML report
+# Open the .Rmd file and click "Knit" to generate the PDF/Word/HTML report
