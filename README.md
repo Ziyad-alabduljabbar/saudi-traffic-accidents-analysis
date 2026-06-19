@@ -63,23 +63,6 @@ This positive trend is a direct result of the **evolution in traffic management 
 
 ---
 
-## ⚙️ Run Locally
-
-```bash
-# Clone the repository
-git clone [https://github.com/Ziyad-alabduljabbar/Saudi-Traffic-Accidents.git](https://github.com/Ziyad-alabduljabbar/Saudi-Traffic-Accidents.git)
-cd Saudi-Traffic-Accidents
-
-# Install required packages in RStudio Console:
-# install.packages(c("tidyverse", "rmarkdown", "tinytex"))
-
-# Run the Analysis
-# Open "accidents-in-the-Kingdom-of-Saudi-Arabia.Rmd"
-# Click the 'Knit' button in RStudio
-```
-
----
-
 ## 👥 Team
 
 | Name |
